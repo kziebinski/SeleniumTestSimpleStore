@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="error" monitorInterval="5"> <!-- status:error mean ONLY show log4j kernel's error log in console-->
+    <Properties>
+        <Property name="BasePathLog">./src/main/logs</Property>
+    </Properties>
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n" />
+        </Console>
+        <RollingFile name="fileLogger" fileName="${BasePathLog}/app.log" filePattern="${BasePathLog}/app-%d{yyyy-MM-dd}.log">
+            <PatternLayout>
+                <pattern>%d{yyy-MM-dd HH:mm:ss.SSS} [%t] %level %logger{36} - %msg%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true" />
+                <SizeBasedTriggeringPolicy size="100 KB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Root level="trace" >
+            <AppenderRef ref="fileLogger" />
+        </Root>
+    </Loggers>
+</Configuration>
