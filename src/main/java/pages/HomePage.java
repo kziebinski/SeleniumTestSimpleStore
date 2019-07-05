@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.socialMediaPage.FacebookPage;
+import pages.socialMediaPage.TwitterPage;
 
 public class HomePage {
 
@@ -16,6 +17,9 @@ public class HomePage {
     @FindBy(xpath = "//*[@id=\"social_block\"]/ul/li[1]/a")
     WebElement facebookButton;
 
+    @FindBy(xpath = "//*[@id=\"social_block\"]/ul/li[2]/a")
+    WebElement twitterButton;
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -26,11 +30,19 @@ public class HomePage {
         return new AuthenticationPage(driver);
     }
 
-    public FacebookPage goToFacebookPage(){
+    public FacebookPage goToFacebookPage() {
         facebookButton.click();
-        for(String facebookTab:driver.getWindowHandles()){
+        for (String facebookTab : driver.getWindowHandles()) {
             driver.switchTo().window(facebookTab);
         }
         return new FacebookPage(driver);
+    }
+
+    public TwitterPage goToTwitterPage() {
+        twitterButton.click();
+        for (String twitterTab : driver.getWindowHandles()) {
+            driver.switchTo().window(twitterTab);
+        }
+        return new TwitterPage(driver);
     }
 }
