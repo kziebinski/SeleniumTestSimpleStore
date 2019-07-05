@@ -30,7 +30,7 @@ public class BasicSetupTest {
 
     @AfterMethod
     public  void closeBrowser(){
-        driver.close();
+        driver.quit();
         log.info("test completed ");
     }
 
