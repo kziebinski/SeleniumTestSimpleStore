@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="error" monitorInterval="5"> <!-- status:error mean ONLY show log4j kernel's error log in console-->
     <Properties>
-        <Property name="BasePathLog">./src/main/logs</Property>
+        <Property name="BasePathLog">./src/main/log</Property>
     </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
