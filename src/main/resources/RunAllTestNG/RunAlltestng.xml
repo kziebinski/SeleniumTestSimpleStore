@@ -7,4 +7,16 @@
             <package name="test.*" />
         </packages>
     </test>
+    <test name="FirefoxTest">
+        <parameter name="browser" value="firefox"/>
+        <packages>
+            <package name="test.*" />
+        </packages>
+    </test>
+    <test name="EdgeTest">
+        <parameter name="browser" value="edge"/>
+        <packages>
+            <package name="test.*" />
+        </packages>
+    </test>
 </suite>
