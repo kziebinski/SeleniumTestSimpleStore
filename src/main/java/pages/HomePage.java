@@ -58,7 +58,7 @@ public class HomePage {
     public ArrayList<String> listImages() throws IOException {
         ArrayList<String> tempListImages = new ArrayList<>();
         for (int iElement = 0; iElement < allImages.size(); iElement++) {
-            String url = allImages.get(iElement).getAttribute("href");
+            String url = allImages.get(iElement).getAttribute("src");
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             con.setRequestMethod("GET");
