@@ -1,0 +1,31 @@
+package test.homePageTest;
+
+import org.testng.Assert;
+import org.testng.annotations.Test;
+import pages.SearchPage;
+import test.BasicSetupTest;
+
+import java.util.List;
+
+public class SearchItemTest extends BasicSetupTest {
+
+    private final String searchTshirtText = "t-shirts";
+
+    @Test
+    public void searchItemTshirts() {
+        SearchPage page =
+                homePage
+                        .fillSearchFieldAndSubmit(searchTshirtText);
+
+        List<String> listItem = page.listElement();
+
+        for (int i = 0; i < listItem.size(); i++) {
+            if(listItem.get(i).toLowerCase().contains(searchTshirtText)){
+                continue;
+            }else {
+                Assert.fail();
+            }
+        }
+        Assert.assertTrue(true);
+    }
+}

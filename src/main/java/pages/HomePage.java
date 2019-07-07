@@ -29,6 +29,12 @@ public class HomePage {
     @FindBy(css = "img")
     List<WebElement> allImages;
 
+    @FindBy(id = "search_query_top")
+    WebElement searchInput;
+
+    @FindBy(xpath = "//*[@id=\"searchbox\"]/button")
+    WebElement searchButton;
+
     public HomePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
@@ -68,5 +74,11 @@ public class HomePage {
                 tempListImages.add("Bad " + url);
         }
         return tempListImages;
+    }
+
+    public SearchPage fillSearchFieldAndSubmit(String inputText){
+        searchInput.sendKeys(inputText);
+        searchButton.click();
+        return new SearchPage(driver);
     }
 }
