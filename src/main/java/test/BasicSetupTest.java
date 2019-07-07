@@ -7,6 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import pages.HomePage;
+import test.setupTest.BrowserSetup;
 
 import java.util.concurrent.TimeUnit;
 
