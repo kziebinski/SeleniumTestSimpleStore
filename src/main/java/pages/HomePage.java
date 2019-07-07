@@ -7,6 +7,12 @@ import org.openqa.selenium.support.PageFactory;
 import pages.socialMediaPage.FacebookPage;
 import pages.socialMediaPage.TwitterPage;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 public class HomePage {
 
     WebDriver driver;
@@ -19,6 +25,9 @@ public class HomePage {
 
     @FindBy(xpath = "//*[@id=\"social_block\"]/ul/li[2]/a")
     WebElement twitterButton;
+
+    @FindBy(css = "img")
+    List<WebElement> allImages;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -44,5 +53,20 @@ public class HomePage {
             driver.switchTo().window(twitterTab);
         }
         return new TwitterPage(driver);
+    }
+
+    public ArrayList<String> listImages() throws IOException {
+        ArrayList<String> tempListImages = new ArrayList<>();
+        for (int iElement = 0; iElement < allImages.size(); iElement++) {
+            String url = allImages.get(iElement).getAttribute("href");
+            URL obj = new URL(url);
+            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+            con.setRequestMethod("GET");
+            if (String.valueOf(con.getResponseCode()).equals("200")) {
+                tempListImages.add("200 " + url);
+            } else
+                tempListImages.add("Bad " + url);
+        }
+        return tempListImages;
     }
 }
