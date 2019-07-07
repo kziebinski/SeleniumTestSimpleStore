@@ -2,7 +2,7 @@ package test.homePageTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.SearchPage;
+import pages.subpages.SearchPage;
 import test.BasicSetupTest;
 
 import java.util.List;

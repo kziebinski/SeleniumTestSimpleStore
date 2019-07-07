@@ -2,8 +2,8 @@ package test.authorizationPageTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.AuthenticationPage;
-import pages.MyAccountPage;
+import pages.subpages.AuthenticationPage;
+import pages.subpages.MyAccountPage;
 import test.BasicSetupTest;
 
 public class LoginTest extends BasicSetupTest {

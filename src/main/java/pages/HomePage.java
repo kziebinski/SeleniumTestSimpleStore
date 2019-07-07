@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import pages.socialMediaPage.FacebookPage;
 import pages.socialMediaPage.TwitterPage;
+import pages.subpages.AuthenticationPage;
+import pages.subpages.SearchPage;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
