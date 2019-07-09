@@ -10,17 +10,17 @@ public class BrowserSetup {
 
     public WebDriver setup(String browser) throws Exception {
         //chrome
-        if (browser.equalsIgnoreCase("chrome")) {
+        if (browser.equalsIgnoreCase(String.valueOf(Browser.CHROME))) {
             System.setProperty("webdriver.chrome.driver", "src/main/resources/webdriver/chromedriver.exe");
             driver = new ChromeDriver();
         }
         //firefox
-        else if (browser.equalsIgnoreCase("firefox")) {
+        else if (browser.equalsIgnoreCase(String.valueOf(Browser.FIREFOX))) {
             System.setProperty("webdriver.gecko.driver", "src/main/resources/webdriver/geckodriver.exe");
             driver = new FirefoxDriver();
         }
         //edge
-        else if (browser.equalsIgnoreCase("edge")) {
+        else if (browser.equalsIgnoreCase(String.valueOf(Browser.EDGE))) {
             System.setProperty("webdriver.edge.driver", "src/main/resources/webdriver/MicrosoftWebDriver.exe");
             driver = new EdgeDriver();
         }
