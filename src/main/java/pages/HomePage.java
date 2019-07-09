@@ -1,9 +1,12 @@
 package pages;
 
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pages.paymentFlow.CartSummary;
 import pages.socialMediaPage.FacebookPage;
 import pages.socialMediaPage.TwitterPage;
 import pages.subpages.AuthenticationPage;
@@ -36,6 +39,15 @@ public class HomePage {
 
     @FindBy(xpath = "//*[@id=\"searchbox\"]/button")
     WebElement searchButton;
+
+    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[1]/div/div[2]/div[2]/a[1]")
+    WebElement firstItemAddToCartButton;
+
+    @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/a")
+    WebElement proceedToCheckoutButton;
+
+    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[1]")
+    WebElement takeFirstItem;
 
     public HomePage(WebDriver driver) {
         this.driver = driver;
@@ -78,9 +90,18 @@ public class HomePage {
         return tempListImages;
     }
 
-    public SearchPage fillSearchFieldAndSubmit(String inputText){
+    public SearchPage fillSearchFieldAndSubmit(String inputText) {
         searchInput.sendKeys(inputText);
         searchButton.click();
         return new SearchPage(driver);
+    }
+
+    public CartSummary clickAddItemToCartAndConfirm() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", takeFirstItem);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(takeFirstItem).perform();
+        firstItemAddToCartButton.click();
+        proceedToCheckoutButton.click();
+        return new CartSummary(driver);
     }
 }

@@ -4,10 +4,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pages.paymentFlow.AddressesPage;
 
 public class AuthenticationPage {
 
-    WebDriver driver;
+    private WebDriver driver;
+    private final String email = "konrad.ziebinski@globallogic.com";
+    private final String password = "zaq1!QAZ";
 
     @FindBy(id = "email")
     WebElement emailInput;
@@ -32,8 +35,12 @@ public class AuthenticationPage {
     }
 
     public MyAccountPage properLoginAndGoToMyAccountPage() {
-        complementEmailPasswordAndClickConfirm("konrad.ziebinski@globallogic.com", "zaq1!QAZ");
+        complementEmailPasswordAndClickConfirm(email, password);
         return new MyAccountPage(driver);
+    }
+    public AddressesPage properLoginAndGoToAddressesPage(){
+        complementEmailPasswordAndClickConfirm(email, password);
+        return new AddressesPage(driver);
     }
 
     public AuthenticationPage complementEmailPasswordAndClickConfirm(String email, String password) {
