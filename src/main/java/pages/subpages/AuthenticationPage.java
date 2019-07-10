@@ -4,11 +4,11 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pages.BasicPage;
 import pages.paymentFlow.AddressesPage;
 
-public class AuthenticationPage {
+public class AuthenticationPage extends BasicPage {
 
-    private WebDriver driver;
     private final String email = "konrad.ziebinski@globallogic.com";
     private final String password = "zaq1!QAZ";
 
@@ -26,8 +26,7 @@ public class AuthenticationPage {
 
 
     public AuthenticationPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public String checkDisplayInvalidErrorText() {

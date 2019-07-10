@@ -3,11 +3,9 @@ package pages.paymentFlow;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import pages.BasicPage;
 
-public class ShippingPage {
-
-    private WebDriver driver;
+public class ShippingPage extends BasicPage {
 
     @FindBy(xpath = "//*[@id=\"form\"]/p/button")
     WebElement proceedToCheckoutButton;
@@ -16,15 +14,15 @@ public class ShippingPage {
     WebElement agreeCheckbox;
 
     public ShippingPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
-    public ShippingPage clickAgreeCheckbox(){
+
+    public ShippingPage clickAgreeCheckbox() {
         agreeCheckbox.click();
         return this;
     }
 
-    public PaymentPage clickProceedToCheckoutButtonAndGoToPaymentPage(){
+    public PaymentPage clickProceedToCheckoutButtonAndGoToPaymentPage() {
         proceedToCheckoutButton.click();
         return new PaymentPage(driver);
     }

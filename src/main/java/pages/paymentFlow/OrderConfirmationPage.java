@@ -3,18 +3,15 @@ package pages.paymentFlow;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import pages.BasicPage;
 
-public class OrderConfirmationPage {
-
-    private WebDriver driver;
+public class OrderConfirmationPage extends BasicPage {
 
     @FindBy(xpath = "//*[@id=\"center_column\"]/div/p/strong")
     WebElement textConfirmOrderComplete;
 
     public OrderConfirmationPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public String getTextConfirmOderComplete(){

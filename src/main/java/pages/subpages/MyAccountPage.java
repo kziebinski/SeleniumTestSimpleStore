@@ -4,10 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import pages.BasicPage;
 
-public class MyAccountPage {
-
-    WebDriver driver;
+public class MyAccountPage extends BasicPage {
 
     @FindBy(xpath = "//*[@id=\"center_column\"]/h1")
     WebElement myAccountText;
@@ -16,8 +15,7 @@ public class MyAccountPage {
     WebElement customerAccountName;
 
     public MyAccountPage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver,this);
+        super(driver);
     }
     public String myAccountNameText(){
         return customerAccountName.getText();

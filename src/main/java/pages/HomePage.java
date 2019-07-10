@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import pages.paymentFlow.CartSummary;
 import pages.socialMediaPage.FacebookPage;
 import pages.socialMediaPage.TwitterPage;
@@ -18,9 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomePage {
-
-    WebDriver driver;
+public class HomePage extends BasicPage {
 
     @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a")
     WebElement signInButton;
@@ -50,8 +47,7 @@ public class HomePage {
     WebElement takeFirstItem;
 
     public HomePage(WebDriver driver) {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+        super(driver);
     }
 
     public AuthenticationPage goToAuthenticationPage() {
