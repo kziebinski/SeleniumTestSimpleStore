@@ -1,8 +1,12 @@
 package test;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.testng.ITestResult;
 import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -10,6 +14,10 @@ import org.testng.annotations.Parameters;
 import pages.HomePage;
 import test.setupTest.BrowserSetup;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 public class BasicSetupTest {
@@ -33,12 +41,25 @@ public class BasicSetupTest {
     }
 
     @AfterMethod
-    public void closeBrowser() {
+    public void closeBrowser(ITestResult result) {
+        takeScreenshotWhenFail(result);
         driver.quit();
         log.info("test completed ");
     }
 
     public void refreshPage() {
         driver.navigate().refresh();
+    }
+
+    public void takeScreenshotWhenFail(ITestResult result) {
+        String simpleDate = new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+        if (ITestResult.FAILURE == result.getStatus()) {
+            File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            try {
+                FileUtils.copyFile(scrFile, new File("src/main/log/screenshots/scr_" + result.getName() + simpleDate + ".png"));
+            } catch (IOException e) {
+                log.info("Error takeScreenshotWhenFail");
+            }
+        }
     }
 }
