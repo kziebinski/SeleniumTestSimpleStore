@@ -10,7 +10,7 @@
         <classes>
             <class name="test.payment.PaymentStepByStep">
                 <methods>
-                    <include name="PaymentBuyItemNotLogin" />
+                    <include name="PaymentRandomItemNotLogin" />
                 </methods>
             </class>
         </classes>

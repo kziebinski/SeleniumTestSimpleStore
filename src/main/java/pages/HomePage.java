@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,8 +17,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class HomePage extends BasicPage {
+
+    private int tempValueItem;
 
     @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a")
     WebElement signInButton;
@@ -93,11 +97,22 @@ public class HomePage extends BasicPage {
     }
 
     public CartSummary clickAddItemToCartAndConfirm() {
-        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", takeFirstItem);
-        Actions actions = new Actions(driver);
-        actions.moveToElement(takeFirstItem).perform();
+//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", takeFirstItem);
+//        Actions actions = new Actions(driver);
+//        actions.moveToElement(takeFirstItem).perform();
+        randomChooseItemDisplayInHomePage();
         firstItemAddToCartButton.click();
         proceedToCheckoutButton.click();
         return new CartSummary(driver);
+    }
+    public HomePage randomChooseItemDisplayInHomePage() {
+        int sizeItem = driver.findElements(By.xpath("//*[@id=\"homefeatured\"]/li")).size();
+        Random rnd = new Random();
+        tempValueItem =  rnd.nextInt(sizeItem) + 1;
+        WebElement randomProduct = driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[" + tempValueItem  + "]"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", randomProduct);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(randomProduct).perform();
+        return this;
     }
 }
