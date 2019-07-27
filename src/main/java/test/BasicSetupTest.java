@@ -58,7 +58,7 @@ public class BasicSetupTest {
             try {
                 FileUtils.copyFile(scrFile, new File("src/main/log/screenshots/scr_" + result.getName() + simpleDate + ".png"));
             } catch (IOException e) {
-                log.info("Error takeScreenshotWhenFail");
+                log.info("Error takeScreenshotWhenFail: " + e);
             }
         }
     }

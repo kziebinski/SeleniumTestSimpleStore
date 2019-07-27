@@ -10,6 +10,7 @@ import pages.paymentFlow.CartSummary;
 import pages.socialMediaPage.FacebookPage;
 import pages.socialMediaPage.TwitterPage;
 import pages.subpages.AuthenticationPage;
+import pages.subpages.ProductPage;
 import pages.subpages.SearchPage;
 
 import java.io.IOException;
@@ -41,14 +42,8 @@ public class HomePage extends BasicPage {
     @FindBy(xpath = "//*[@id=\"searchbox\"]/button")
     WebElement searchButton;
 
-    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[1]/div/div[2]/div[2]/a[1]")
-    WebElement firstItemAddToCartButton;
-
     @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/a")
     WebElement proceedToCheckoutButton;
-
-    @FindBy(xpath = "//*[@id=\"homefeatured\"]/li[1]")
-    WebElement takeFirstItem;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -97,22 +92,25 @@ public class HomePage extends BasicPage {
     }
 
     public CartSummary clickAddItemToCartAndConfirm() {
-//        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", takeFirstItem);
-//        Actions actions = new Actions(driver);
-//        actions.moveToElement(takeFirstItem).perform();
         randomChooseItemDisplayInHomePage();
-        firstItemAddToCartButton.click();
+        driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[" + tempValueItem + "]/div/div[2]/div[2]/a[1]")).click();
         proceedToCheckoutButton.click();
         return new CartSummary(driver);
     }
-    public HomePage randomChooseItemDisplayInHomePage() {
+
+    public void randomChooseItemDisplayInHomePage() {
         int sizeItem = driver.findElements(By.xpath("//*[@id=\"homefeatured\"]/li")).size();
         Random rnd = new Random();
-        tempValueItem =  rnd.nextInt(sizeItem) + 1;
-        WebElement randomProduct = driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[" + tempValueItem  + "]"));
+        tempValueItem = rnd.nextInt(sizeItem) + 1;
+        WebElement randomProduct = driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[" + tempValueItem + "]"));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", randomProduct);
         Actions actions = new Actions(driver);
         actions.moveToElement(randomProduct).perform();
-        return this;
+    }
+
+    public ProductPage clickItemAndGoToProductPage() {
+        randomChooseItemDisplayInHomePage();
+        driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[" + tempValueItem + "]/div/div[2]/h5/a")).click();
+        return new ProductPage(driver);
     }
 }
