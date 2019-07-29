@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasicPage;
+import pages.paymentFlow.CartSummary;
 
 public class MyAccountPage extends BasicPage {
 
@@ -13,6 +14,9 @@ public class MyAccountPage extends BasicPage {
     @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a")
     WebElement customerAccountName;
 
+    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a")
+    WebElement shoppingCartButton;
+
     public MyAccountPage(WebDriver driver) {
         super(driver);
     }
@@ -21,5 +25,10 @@ public class MyAccountPage extends BasicPage {
     }
     public String myAccountText(){
         return myAccountText.getText();
+    }
+
+    public CartSummary goToCartSummaryPage(){
+        shoppingCartButton.click();
+        return new CartSummary(driver);
     }
 }
