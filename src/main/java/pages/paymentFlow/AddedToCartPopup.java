@@ -9,7 +9,7 @@ import pages.BasicPage;
 
 public class AddedToCartPopup extends BasicPage {
 
-    WebDriverWait wait = new WebDriverWait(driver, 3);
+    protected WebDriverWait wait = new WebDriverWait(driver, 3);
 
     @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/a")
     WebElement proceedToCheckoutButton;
