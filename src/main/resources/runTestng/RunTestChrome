@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestSuite" parallel="tests" thread-count="2">
+<suite name="TestSuite"  parallel="tests" thread-count="2">
     <listeners>
         <listener class-name="org.uncommons.reportng.HTMLReporter"></listener>
         <listener class-name="org.uncommons.reportng.JUnitXMLReporter"></listener>
     </listeners>
-    <test name="Test">
+    <test name="ChromeTest">
         <parameter name="browser" value="chrome"/>
-        <classes>
-            <class name="test.shoppingCart.deleteProductFromListShoppingCart">
-                <methods>
-                    <include name="deleteProdcutFromListCartWithAuthorization" />
-                </methods>
-            </class>
-        </classes>
+        <packages>
+            <package name="test.*" />
+        </packages>
     </test>
 </suite>

@@ -11,7 +11,7 @@ import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
-import pages.HomePage;
+import pages.homePage.HomePage;
 import test.setupTest.BrowserSetup;
 
 import java.io.File;

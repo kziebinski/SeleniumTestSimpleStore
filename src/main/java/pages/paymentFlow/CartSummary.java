@@ -10,7 +10,7 @@ import pages.subpages.AuthenticationPage;
 
 public class CartSummary extends BasicPage {
 
-    protected WebDriverWait wait = new WebDriverWait(driver, 5);
+    private WebDriverWait wait = new WebDriverWait(driver, 5);
 
     @FindBy(xpath = "//*[@id=\"center_column\"]/p[2]/a[1]")
     WebElement proceedToCheckoutButton;
@@ -31,11 +31,11 @@ public class CartSummary extends BasicPage {
         return new AuthenticationPage(driver);
     }
 
-    public String getTextAlertEmptyShoppingCart(){
+    public String getTextAlertEmptyShoppingCart() {
         return alerEmptyShoppingCart.getText();
     }
 
-    public CartSummary clickDeleteProductButton(){
+    public CartSummary clickDeleteProductButton() {
         wait.until(ExpectedConditions.elementToBeClickable(deleteProductButton)).click();
         wait.until(ExpectedConditions.visibilityOf(alerEmptyShoppingCart));
         return this;

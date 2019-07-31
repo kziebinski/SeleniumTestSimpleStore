@@ -1,4 +1,4 @@
-package pages;
+package pages.homePage;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.BasicPage;
 import pages.paymentFlow.CartSummary;
 import pages.socialMediaPage.FacebookPage;
 import pages.socialMediaPage.TwitterPage;
@@ -23,6 +26,7 @@ import java.util.Random;
 public class HomePage extends BasicPage {
 
     private int tempValueItem;
+    private WebDriverWait wait = new WebDriverWait(driver, 3);
 
     @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a")
     WebElement signInButton;
@@ -44,6 +48,12 @@ public class HomePage extends BasicPage {
 
     @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/a")
     WebElement proceedToCheckoutButton;
+
+    @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[1]/span")
+    WebElement closePopupButton;
+
+    @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a")
+    WebElement viewShoppingCartListButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -93,12 +103,37 @@ public class HomePage extends BasicPage {
 
     public CartSummary clickAddItemToCartAndConfirm() {
         randomChooseItemDisplayInHomePage();
-        driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[" + tempValueItem + "]/div/div[2]/div[2]/a[1]")).click();
+        findElementAddToCart(tempValueItem).click();
         proceedToCheckoutButton.click();
         return new CartSummary(driver);
     }
 
-    public void randomChooseItemDisplayInHomePage() {
+    public ProductPage clickItemAndGoToProductPage() {
+        randomChooseItemDisplayInHomePage();
+        findElementProductImage(tempValueItem).click();
+        return new ProductPage(driver);
+    }
+
+    public HomePage clickAddItemToCartAndClosePopup() {
+        randomChooseItemDisplayInHomePage();
+        findElementAddToCart(tempValueItem).click();
+        wait.until(ExpectedConditions.elementToBeClickable(closePopupButton)).click();
+        return this;
+    }
+
+    public ViewShoppingCartList moveMouseToShoppingCartList() {
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", viewShoppingCartListButton);
+        Actions actions = new Actions(driver);
+        actions.moveToElement(viewShoppingCartListButton).perform();
+        return new ViewShoppingCartList(driver);
+    }
+
+    public CartSummary clickShoppingCartButton() {
+        viewShoppingCartListButton.click();
+        return new CartSummary(driver);
+    }
+
+    private void randomChooseItemDisplayInHomePage() {
         int sizeItem = driver.findElements(By.xpath("//*[@id=\"homefeatured\"]/li")).size();
         Random rnd = new Random();
         tempValueItem = rnd.nextInt(sizeItem) + 1;
@@ -108,9 +143,11 @@ public class HomePage extends BasicPage {
         actions.moveToElement(randomProduct).perform();
     }
 
-    public ProductPage clickItemAndGoToProductPage() {
-        randomChooseItemDisplayInHomePage();
-        driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[" + tempValueItem + "]/div/div[2]/h5/a")).click();
-        return new ProductPage(driver);
+    private WebElement findElementAddToCart(int tempValueItem) {
+        return driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[" + tempValueItem + "]/div/div[2]/div[2]/a[1]"));
+    }
+
+    private WebElement findElementProductImage(int tempValueItem) {
+        return driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[" + tempValueItem + "]/div/div[2]/h5/a"));
     }
 }
