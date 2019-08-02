@@ -17,6 +17,9 @@ public class MyAccountPage extends BasicPage {
     @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a")
     WebElement shoppingCartButton;
 
+    @FindBy(xpath = "//*[@id=\"center_column\"]/div/div[1]/ul/li[4]/a")
+    WebElement myPersonalInformationButton;
+
     public MyAccountPage(WebDriver driver) {
         super(driver);
     }
@@ -30,5 +33,9 @@ public class MyAccountPage extends BasicPage {
     public CartSummary goToCartSummaryPage(){
         shoppingCartButton.click();
         return new CartSummary(driver);
+    }
+    public PersonalInfromationPage clickMyPersonalInfromationButtonAndGoToPersonalInformationPage(){
+        myPersonalInformationButton.click();
+        return new PersonalInfromationPage(driver);
     }
 }

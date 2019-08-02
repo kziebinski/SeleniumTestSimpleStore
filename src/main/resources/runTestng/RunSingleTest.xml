@@ -8,9 +8,9 @@
     <test name="Test">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="test.shoppingCart.deleteProductFromListShoppingCart">
+            <class name="test.account.ChangeInformationAccount">
                 <methods>
-                    <include name="deleteProdcutFromListCartWithAuthorization" />
+                    <include name="changeEmailAndPasswordThenLoginWithNewCredential" />
                 </methods>
             </class>
         </classes>
