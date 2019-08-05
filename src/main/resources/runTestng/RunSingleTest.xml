@@ -8,9 +8,9 @@
     <test name="Test">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="test.account.ChangeInformationAccount">
+            <class name="test.product.Wishlist">
                 <methods>
-                    <include name="changeEmailAndPasswordThenLoginWithNewCredential" />
+                    <include name="AddToWishlistWithoutLogin" />
                 </methods>
             </class>
         </classes>

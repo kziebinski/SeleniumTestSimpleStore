@@ -4,6 +4,8 @@ import model.Product;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasicPage;
 import pages.paymentFlow.AddedToCartPopup;
 import pages.paymentFlow.CartSummary;
@@ -13,6 +15,7 @@ import java.util.Random;
 public class ProductPage extends BasicPage {
 
     private Product product = new Product();
+    private WebDriverWait wait = new WebDriverWait(driver, 3);
 
     @FindBy(xpath = "//*[@id=\"add_to_cart\"]/button")
     WebElement addToCartButton;
@@ -25,6 +28,12 @@ public class ProductPage extends BasicPage {
 
     @FindBy(id = "our_price_display" )
     WebElement priceProduct;
+
+    @FindBy(id = "wishlist_button")
+    WebElement addToWishlistButton;
+
+    @FindBy(xpath = "//*[@id=\"product\"]/div[2]/div/div/div/div/p")
+    WebElement addedToYourWishlistPopup;
 
     public ProductPage(WebDriver driver){ super(driver); }
 
@@ -45,6 +54,13 @@ public class ProductPage extends BasicPage {
         addQuantity();
         addToCartButton.click();
         return new AddedToCartPopup(driver);
+    }
+    public ProductPage clickAddToWishlistButton(){
+        wait.until(ExpectedConditions.elementToBeClickable(addToWishlistButton)).click();
+        return this;
+    }
+    public String textAddedToYourWishlistPopup(){
+        return addedToYourWishlistPopup.getText();
     }
 
 }

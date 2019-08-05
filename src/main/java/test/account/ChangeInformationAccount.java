@@ -24,10 +24,9 @@ public class ChangeInformationAccount extends BasicSetupTest {
         Assert.assertEquals(page.myAccountNameText(), "Konrad Ziebinski");
     }
 
+    //needRefactor
     @AfterTest
-    public void backToTempEmailAndTempPassword() throws InterruptedException {
-
-        //refactor
+    public void backToTempEmailAndTempPassword() {
         homePage
                 .goToAuthenticationPage()
                 .properLoginWithRandomGenerateEmailAndLogin()
