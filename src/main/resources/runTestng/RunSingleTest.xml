@@ -8,9 +8,9 @@
     <test name="Test">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="test.productTest.WriteReview">
+            <class name="test.paymentTest.PaymentStepByStep">
                 <methods>
-                    <include name="sendReviewToAdminIfUserNotLogin" />
+                    <include name="PaymentRandomQuantityVerifyAmount" />
                 </methods>
             </class>
         </classes>

@@ -2,8 +2,8 @@ package model;
 
 public class Product {
 
-    private float value;
-    private float quantity;
+    private static float value;
+    private static float quantity;
 
     public float getValue() {
         return value;
