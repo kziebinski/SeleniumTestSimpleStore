@@ -32,7 +32,7 @@ public class ProductPage extends BasicPage {
     @FindBy(id = "wishlist_button")
     WebElement addToWishlistButton;
 
-    @FindBy(xpath = "//*[@id=\"productTest\"]/div[2]/div/div/div/div/p")
+    @FindBy(xpath = "//*[@id=\"product\"]/div[2]/div/div/div/div/p")
     WebElement addedToYourWishlistPopup;
 
     @FindBy(xpath = "//*[@id=\"usefull_link_block\"]/li[2]/a")
