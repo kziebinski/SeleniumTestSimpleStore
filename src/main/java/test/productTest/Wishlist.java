@@ -2,7 +2,7 @@ package test.productTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.subpages.ProductPage;
+import pages.subpages.product.ProductPage;
 import test.BasicSetupTest;
 
 public class Wishlist extends BasicSetupTest {

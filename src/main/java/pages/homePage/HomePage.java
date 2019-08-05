@@ -13,7 +13,7 @@ import pages.paymentFlow.CartSummary;
 import pages.socialMediaPage.FacebookPage;
 import pages.socialMediaPage.TwitterPage;
 import pages.subpages.AuthenticationPage;
-import pages.subpages.ProductPage;
+import pages.subpages.product.ProductPage;
 import pages.subpages.SearchPage;
 
 import java.io.IOException;

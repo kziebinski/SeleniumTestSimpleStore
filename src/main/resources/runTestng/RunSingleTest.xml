@@ -8,9 +8,9 @@
     <test name="Test">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="test.productTest.Print">
+            <class name="test.productTest.WriteReview">
                 <methods>
-                    <include name="printProductWithoutLogin" />
+                    <include name="sendReviewToAdminIfUserNotLogin" />
                 </methods>
             </class>
         </classes>

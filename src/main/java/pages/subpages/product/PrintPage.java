@@ -1,4 +1,4 @@
-package pages.subpages;
+package pages.subpages.product;
 
 import org.openqa.selenium.WebDriver;
 import pages.BasicPage;

@@ -1,6 +1,7 @@
-package pages.subpages;
+package pages.subpages.product;
 
 import model.Product;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasicPage;
 import pages.paymentFlow.AddedToCartPopup;
 import pages.paymentFlow.CartSummary;
+import test.productTest.WriteReview;
 
 import java.util.Random;
 
@@ -37,6 +39,9 @@ public class ProductPage extends BasicPage {
 
     @FindBy(xpath = "//*[@id=\"usefull_link_block\"]/li[2]/a")
     WebElement printButton;
+
+    @FindBy(xpath = "//*[@id=\"product_comments_block_extra\"]/ul/li/a")
+    WebElement writeReviewButton;
 
     public ProductPage(WebDriver driver){ super(driver); }
 
@@ -71,6 +76,17 @@ public class ProductPage extends BasicPage {
             driver.switchTo().window(printTab);
         }
         return new PrintPage(driver);
+    }
+    public WriteReviewPage clickWriteReviewButton(){
+        wait.until(ExpectedConditions.elementToBeClickable(writeReviewButton)).click();
+        return new WriteReviewPage(driver);
+    }
+    public boolean writeReviewButtonNotExist(){
+        try{
+            return writeReviewButton.isDisplayed();
+        }catch (NoSuchElementException ignored){
+            return false;
+        }
     }
 
 }

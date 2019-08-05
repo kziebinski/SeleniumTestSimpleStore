@@ -2,7 +2,7 @@ package test.productTest;
 
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.subpages.PrintPage;
+import pages.subpages.product.PrintPage;
 import test.BasicSetupTest;
 
 public class Print extends BasicSetupTest {
