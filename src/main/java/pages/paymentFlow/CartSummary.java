@@ -4,13 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasicPage;
 import pages.subpages.AuthenticationPage;
 
 public class CartSummary extends BasicPage {
-
-    private WebDriverWait wait = new WebDriverWait(driver, 5);
 
     @FindBy(xpath = "//*[@id=\"center_column\"]/p[2]/a[1]")
     WebElement proceedToCheckoutButton;

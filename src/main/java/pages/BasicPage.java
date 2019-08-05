@@ -4,12 +4,14 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.homePage.HomePage;
 import pages.subpages.AuthenticationPage;
 
 public abstract class BasicPage {
 
     protected WebDriver driver;
+    protected WebDriverWait wait;
 
     @FindBy(id = "header_logo")
     WebElement logoImage;
@@ -19,6 +21,7 @@ public abstract class BasicPage {
 
     public BasicPage(WebDriver driver) {
         this.driver = driver;
+        this.wait = new WebDriverWait(driver, 3);
         PageFactory.initElements(driver, this);
     }
 

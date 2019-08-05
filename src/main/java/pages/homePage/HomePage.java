@@ -26,7 +26,7 @@ import java.util.Random;
 public class HomePage extends BasicPage {
 
     private int tempValueItem;
-    private WebDriverWait wait = new WebDriverWait(driver, 3);
+
 
     @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a")
     WebElement signInButton;

@@ -26,7 +26,7 @@ public class WriteReview extends BasicSetupTest {
     public void sendReviewToAdminIfUserNotLogin() {
         ProductPage page =
                 homePage
-                .clickItemAndGoToProductPage();
+                        .clickItemAndGoToProductPage();
 
         Assert.assertEquals(false, page.writeReviewButtonNotExist());
     }

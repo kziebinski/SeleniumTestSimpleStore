@@ -4,12 +4,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasicPage;
 
 public class AddedToCartPopup extends BasicPage {
-
-    protected WebDriverWait wait = new WebDriverWait(driver, 3);
 
     @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/a")
     WebElement proceedToCheckoutButton;

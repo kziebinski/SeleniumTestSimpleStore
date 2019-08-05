@@ -6,18 +6,15 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasicPage;
 import pages.paymentFlow.AddedToCartPopup;
 import pages.paymentFlow.CartSummary;
-import test.productTest.WriteReview;
 
 import java.util.Random;
 
 public class ProductPage extends BasicPage {
 
     private Product product = new Product();
-    private WebDriverWait wait = new WebDriverWait(driver, 3);
 
     @FindBy(xpath = "//*[@id=\"add_to_cart\"]/button")
     WebElement addToCartButton;
@@ -42,6 +39,9 @@ public class ProductPage extends BasicPage {
 
     @FindBy(xpath = "//*[@id=\"product_comments_block_extra\"]/ul/li/a")
     WebElement writeReviewButton;
+
+    @FindBy(id = "send_friend_button")
+    WebElement sendFriendButton;
 
     public ProductPage(WebDriver driver){ super(driver); }
 
@@ -87,6 +87,10 @@ public class ProductPage extends BasicPage {
         }catch (NoSuchElementException ignored){
             return false;
         }
+    }
+    public SendToFriendPage clickAndGoTOSendFriendPage(){
+        wait.until(ExpectedConditions.elementToBeClickable(sendFriendButton)).click();
+        return new SendToFriendPage(driver);
     }
 
 }
