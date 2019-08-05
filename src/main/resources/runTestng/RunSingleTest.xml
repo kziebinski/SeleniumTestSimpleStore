@@ -8,9 +8,9 @@
     <test name="Test">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="test.product.Wishlist">
+            <class name="test.productTest.Print">
                 <methods>
-                    <include name="AddToWishlistWithoutLogin" />
+                    <include name="printProductWithoutLogin" />
                 </methods>
             </class>
         </classes>

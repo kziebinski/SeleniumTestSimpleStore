@@ -32,8 +32,11 @@ public class ProductPage extends BasicPage {
     @FindBy(id = "wishlist_button")
     WebElement addToWishlistButton;
 
-    @FindBy(xpath = "//*[@id=\"product\"]/div[2]/div/div/div/div/p")
+    @FindBy(xpath = "//*[@id=\"productTest\"]/div[2]/div/div/div/div/p")
     WebElement addedToYourWishlistPopup;
+
+    @FindBy(xpath = "//*[@id=\"usefull_link_block\"]/li[2]/a")
+    WebElement printButton;
 
     public ProductPage(WebDriver driver){ super(driver); }
 
@@ -61,6 +64,13 @@ public class ProductPage extends BasicPage {
     }
     public String textAddedToYourWishlistPopup(){
         return addedToYourWishlistPopup.getText();
+    }
+    public PrintPage clickPrintButton(){
+        wait.until(ExpectedConditions.elementToBeClickable(printButton)).click();
+        for (String printTab : driver.getWindowHandles()) {
+            driver.switchTo().window(printTab);
+        }
+        return new PrintPage(driver);
     }
 
 }

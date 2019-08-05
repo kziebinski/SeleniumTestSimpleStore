@@ -1,4 +1,4 @@
-package test.payment;
+package test.paymentTest;
 
 import model.Product;
 import org.testng.Assert;
