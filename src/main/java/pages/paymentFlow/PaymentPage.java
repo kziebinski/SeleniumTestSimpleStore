@@ -13,7 +13,7 @@ public class PaymentPage extends BasicPage {
     @FindBy(xpath = "//*[@id=\"HOOK_PAYMENT\"]/div[2]/div/p/a")
     WebElement payByCheckButton;
 
-    public PaymentPage(WebDriver driver) {
+    PaymentPage(WebDriver driver) {
         super(driver);
     }
     public PaymentSummaryPage clickPayByBankWireButton(){

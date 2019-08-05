@@ -27,7 +27,6 @@ public class HomePage extends BasicPage {
 
     private int tempValueItem;
 
-
     @FindBy(xpath = "//*[@id=\"header\"]/div[2]/div/div/nav/div[1]/a")
     WebElement signInButton;
 
@@ -80,7 +79,7 @@ public class HomePage extends BasicPage {
         return new TwitterPage(driver);
     }
 
-    public ArrayList<String> listImages() throws IOException {
+    public ArrayList<String> calculatelistImages() throws IOException {
         ArrayList<String> tempListImages = new ArrayList<>();
         for (int iElement = 0; iElement < allImages.size(); iElement++) {
             String url = allImages.get(iElement).getAttribute("src");

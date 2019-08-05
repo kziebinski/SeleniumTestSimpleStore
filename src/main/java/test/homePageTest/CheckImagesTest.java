@@ -16,7 +16,7 @@ public class CheckImagesTest extends BasicSetupTest {
     public void checkImagesExist() throws IOException {
         ArrayList<String> tempList =
                 homePage
-                        .listImages();
+                        .calculatelistImages();
 
         for (int i = 0; i < tempList.size(); i++) {
             if (tempList.get(i).substring(0, 3).equalsIgnoreCase("200")) {

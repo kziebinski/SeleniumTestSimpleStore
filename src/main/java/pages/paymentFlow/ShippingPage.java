@@ -13,7 +13,7 @@ public class ShippingPage extends BasicPage {
     @FindBy(id = "cgv")
     WebElement agreeCheckbox;
 
-    public ShippingPage(WebDriver driver) {
+    ShippingPage(WebDriver driver) {
         super(driver);
     }
 

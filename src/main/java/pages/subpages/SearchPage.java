@@ -18,7 +18,7 @@ public class SearchPage extends BasicPage {
         super(driver);
     }
 
-    public ArrayList<String> listElement(){
+    public ArrayList<String> getListElement(){
         ArrayList<String> tempListItem = new ArrayList<>();
         for(WebElement element:listItem){
             tempListItem.add(element.getText());

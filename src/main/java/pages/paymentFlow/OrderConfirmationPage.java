@@ -10,7 +10,7 @@ public class OrderConfirmationPage extends BasicPage {
     @FindBy(xpath = "//*[@id=\"center_column\"]/div/p/strong")
     WebElement textConfirmOrderComplete;
 
-    public OrderConfirmationPage(WebDriver driver) {
+    OrderConfirmationPage(WebDriver driver) {
         super(driver);
     }
 

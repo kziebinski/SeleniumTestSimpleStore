@@ -17,7 +17,7 @@ public class SearchItemTest extends BasicSetupTest {
                 homePage
                         .fillSearchFieldAndSubmit(searchTshirtText);
 
-        List<String> listItem = page.listElement();
+        List<String> listItem = page.getListElement();
 
         for (int i = 0; i < listItem.size(); i++) {
             if(listItem.get(i).toLowerCase().contains(searchTshirtText)){
