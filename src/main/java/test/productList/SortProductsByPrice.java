@@ -17,8 +17,8 @@ public class SortProductsByPrice extends BasicSetupTest {
                         .clickAndGoToBestSellersPage()
                         .clickSortHighestPrice();
 
-        page.getListNotSort().sort(Collections.reverseOrder());
-        assertEquals(page.getListNotSort(), page.getListSortByHigherPrice());
+        page.getListPriceNotSort().sort(Collections.reverseOrder());
+        assertEquals(page.getListPriceNotSort(), page.getListSortByHigherPrice());
     }
 
     //Test fail - bug on page
@@ -29,7 +29,7 @@ public class SortProductsByPrice extends BasicSetupTest {
                         .clickAndGoToBestSellersPage()
                         .clickSortLowestPrice();
 
-        Collections.sort(page.getListNotSort());
-        assertEquals(page.getListNotSort(), page.getListSortByLowestPrice());
+        Collections.sort(page.getListPriceNotSort());
+        assertEquals(page.getListPriceNotSort(), page.getListSortByLowestPrice());
     }
 }

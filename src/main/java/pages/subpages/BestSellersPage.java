@@ -12,18 +12,23 @@ import java.util.List;
 
 public class BestSellersPage extends BasicPage {
 
-    private List<Float> listNotSort;
+    private int countItem = 7;
+    private List<Float> listPriceNotSort;
+    private List<String> listNameNotSort;
     private List<Float> listSortByHigherPrice = new ArrayList<>();
     private List<Float> listSortByLowestPrice = new ArrayList<>();
+    private List<String> listSortByNameA_Z = new ArrayList<>();
     private final String sortPriceDESC = "price:desc";
     private final String sortPriceASC = "price:asc";
+    private final String sortNameASC = "name:asc";
 
     @FindBy(id = "selectProductSort")
     WebElement sortByButton;
 
     public BestSellersPage(WebDriver driver) {
         super(driver);
-        this.listNotSort = listPriceOfProduct();
+        this.listPriceNotSort = listPriceOfProduct();
+        this.listNameNotSort = listNameProduct();
     }
 
     private BestSellersPage clickSortAndSelectValue(String value) {
@@ -42,9 +47,14 @@ public class BestSellersPage extends BasicPage {
         return this;
     }
 
+    public BestSellersPage clickSortNameA_Z(){
+        clickSortAndSelectValue(sortNameASC);
+        return this;
+    }
+
     private List<Float> listPriceOfProduct() {
         List<Float> listTemp = new ArrayList<>();
-        for (int i = 1; i < 8; i++) {
+        for (int i = 1; i <= countItem + 1; i++) {
             List<WebElement> listPrice = driver.findElements(By.xpath("//*[@id=\"center_column\"]/ul/li[" + i + "]/div/div[2]/div[1]/span[1]"));
             for (WebElement element : listPrice) {
                 listTemp.add(Float.parseFloat(element.getText().substring(1)));
@@ -52,9 +62,19 @@ public class BestSellersPage extends BasicPage {
         }
         return listTemp;
     }
+    public List<String> listNameProduct(){
+        List<String> listTemp = new ArrayList<>();
+        for (int i = 1; i <= countItem + 1; i++){
+            List<WebElement> listName = driver.findElements(By.xpath("//*[@id=\"center_column\"]/ul/li["+i+"]/div/div[2]/h5/a"));
+            for (WebElement element : listName){
+                listTemp.add(element.getText());
+            }
+        }
+        return listTemp;
+    }
 
-    public List<Float> getListNotSort() {
-        return listNotSort;
+    public List<Float> getListPriceNotSort() {
+        return listPriceNotSort;
     }
 
     public List<Float> getListSortByHigherPrice() {
@@ -65,5 +85,12 @@ public class BestSellersPage extends BasicPage {
     public List<Float> getListSortByLowestPrice() {
         this.listSortByLowestPrice = listPriceOfProduct();
         return this.listSortByLowestPrice;
+    }
+    public List<String> getListNameNotSort(){
+        return listNameNotSort;
+    }
+    public List<String> getListSortByNameA_Z(){
+        this.listSortByNameA_Z = listNameProduct();
+        return this.listSortByNameA_Z;
     }
 }

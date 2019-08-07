@@ -8,9 +8,9 @@
     <test name="Test">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="test.paymentTest.PaymentStepByStep">
+            <class name="test.productList.SortProdcutsByName">
                 <methods>
-                    <include name="PaymentRandomQuantityVerifyAmount" />
+                    <include name="sortProductsByNameA_Z" />
                 </methods>
             </class>
         </classes>
