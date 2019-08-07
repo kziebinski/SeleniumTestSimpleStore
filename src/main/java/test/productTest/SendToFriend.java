@@ -1,10 +1,11 @@
 package test.productTest;
 
 import com.github.javafaker.Faker;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.subpages.product.SendToFriendPage;
 import test.BasicSetupTest;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class SendToFriend extends BasicSetupTest {
 
@@ -18,8 +19,8 @@ public class SendToFriend extends BasicSetupTest {
                         .clickAndGoTOSendFriendPage()
                         .sendKeysNameAndEmailThenClickSend(faker.name().firstName(), faker.internet().emailAddress());
 
-        Assert.assertEquals("Send to a friend", page.getTextSendToFriend());
-        Assert.assertEquals("Your e-mail has been sent successfully", page.getTextSendSuccessfully());
+        assertEquals("Send to a friend", page.getTextSendToFriend());
+        assertEquals("Your e-mail has been sent successfully", page.getTextSendSuccessfully());
 
     }
 
@@ -31,7 +32,7 @@ public class SendToFriend extends BasicSetupTest {
                         .clickAndGoTOSendFriendPage()
                         .sendKeysNameAndEmailThenClickSend(null, faker.internet().emailAddress());
 
-        Assert.assertEquals("You did not fill required fields", page.getTextSendFriendError());
+        assertEquals("You did not fill required fields", page.getTextSendFriendError());
 
     }
 
@@ -43,6 +44,6 @@ public class SendToFriend extends BasicSetupTest {
                         .clickAndGoTOSendFriendPage()
                         .sendKeysNameAndEmailThenClickSend(faker.name().firstName(), null);
 
-        Assert.assertEquals("You did not fill required fields", page.getTextSendFriendError());
+        assertEquals("You did not fill required fields", page.getTextSendFriendError());
     }
 }

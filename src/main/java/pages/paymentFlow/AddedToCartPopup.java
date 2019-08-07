@@ -1,5 +1,6 @@
 package pages.paymentFlow;
 
+import model.Product;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,8 +9,7 @@ import pages.BasicPage;
 
 public class AddedToCartPopup extends BasicPage {
 
-    @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/a")
-    WebElement proceedToCheckoutButton;
+    private final Product product;
 
     @FindBy(xpath = "//*[@id=\"layer_cart\"]/div[1]/div[2]/div[1]/span")
     WebElement totalProductValue;
@@ -26,28 +26,37 @@ public class AddedToCartPopup extends BasicPage {
     @FindBy(id = "layer_cart_product_price")
     WebElement totalLayerCartValue;
 
-    public AddedToCartPopup(WebDriver driver){
+    public AddedToCartPopup(WebDriver driver, Product product) {
         super(driver);
+        this.product = product;
     }
 
     public float getValueTotalProductValue() {
         wait.until(ExpectedConditions.visibilityOfAllElements(totalProductValue));
         return Float.parseFloat(totalProductValue.getText().substring(1));
     }
-    public float getValueShipping(){
+
+    public float getValueShipping() {
         wait.until(ExpectedConditions.visibilityOf(totalSnippingValue));
         return Float.parseFloat((totalSnippingValue.getText().substring(1)));
     }
-    public float getTotalValue(){
+
+    public float getTotalValue() {
         wait.until(ExpectedConditions.visibilityOf(totalValue));
         return Float.parseFloat(totalValue.getText().substring(1));
     }
-    public float getQuantityValueLayerCart(){
+
+    public float getQuantityValueLayerCart() {
         wait.until(ExpectedConditions.visibilityOf(quantityLayerCartValue));
         return Float.parseFloat(quantityLayerCartValue.getText());
     }
-    public float getTotalValueLayerCart(){
+
+    public float getTotalValueLayerCart() {
         wait.until(ExpectedConditions.visibilityOf(totalLayerCartValue));
         return Float.parseFloat(totalLayerCartValue.getText().substring(1));
+    }
+
+    public Product getProduct() {
+        return product;
     }
 }

@@ -1,10 +1,11 @@
 package test.authorizationPageTest;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.subpages.AuthenticationPage;
 import pages.subpages.MyAccountPage;
 import test.BasicSetupTest;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class LoginTest extends BasicSetupTest {
 
@@ -15,7 +16,7 @@ public class LoginTest extends BasicSetupTest {
                         .goToAuthenticationPage()
                         .complementEmailPasswordAndClickConfirm("1@gmail.com", "1");
 
-        Assert.assertEquals(authenticationPage.checkDisplayInvalidErrorText(), "Invalid password.");
+        assertEquals(authenticationPage.checkDisplayInvalidErrorText(), "Invalid password.");
     }
 
     @Test
@@ -25,7 +26,7 @@ public class LoginTest extends BasicSetupTest {
                         .goToAuthenticationPage()
                         .complementEmailPasswordAndClickConfirm(" ", "password");
 
-        Assert.assertEquals(authenticationPage.checkDisplayInvalidErrorText(), "An email address required.");
+        assertEquals(authenticationPage.checkDisplayInvalidErrorText(), "An email address required.");
     }
 
     @Test
@@ -35,8 +36,8 @@ public class LoginTest extends BasicSetupTest {
                         .goToAuthenticationPage()
                         .properLoginAndGoToMyAccountPage();
 
-        Assert.assertEquals(myAccountPage.myAccountText(), "MY ACCOUNT");
-        Assert.assertEquals(myAccountPage.myAccountNameText(), "Konrad Ziebinski");
+        assertEquals(myAccountPage.myAccountText(), "MY ACCOUNT");
+        assertEquals(myAccountPage.myAccountNameText(), "Konrad Ziebinski");
 
     }
 }

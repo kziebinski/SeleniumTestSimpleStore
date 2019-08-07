@@ -1,8 +1,9 @@
 package test.homePageTest;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.BasicSetupTest;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class FailTest extends BasicSetupTest {
 
@@ -11,6 +12,6 @@ public class FailTest extends BasicSetupTest {
                 homePage
                         .goToAuthenticationPage();
 
-        Assert.assertEquals(false,true);
+        assertEquals(false,true);
     }
 }

@@ -1,16 +1,18 @@
 package test.account;
 
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.Test;
 import pages.subpages.MyAccountPage;
 import test.BasicSetupTest;
 
+import java.io.IOException;
+
+import static org.testng.Assert.assertEquals;
+
 public class ChangeInformationAccount extends BasicSetupTest {
 
     @Test
-    public void changeEmailAndPasswordThenLoginWithNewCredential() {
-
+    public void changeEmailAndPasswordThenLoginWithNewCredential() throws IOException {
         MyAccountPage page =
                 homePage
                         .goToAuthenticationPage()
@@ -20,18 +22,18 @@ public class ChangeInformationAccount extends BasicSetupTest {
                         .clickSignOutButton()
                         .properLoginWithRandomGenerateEmailAndLogin();
 
-        Assert.assertEquals(page.myAccountText(), "MY ACCOUNT");
-        Assert.assertEquals(page.myAccountNameText(), "Konrad Ziebinski");
+        assertEquals(page.myAccountText(), "MY ACCOUNT");
+        assertEquals(page.myAccountNameText(), "Konrad Ziebinski");
     }
 
-    //needRefactor
+    //TODO_needRefactor
     @AfterTest
-    public void backToTempEmailAndTempPassword() {
-        homePage
-                .goToAuthenticationPage()
-                .properLoginWithRandomGenerateEmailAndLogin()
-                .clickMyPersonalInfromationButtonAndGoToPersonalInformationPage()
-                .fillNewEmailAndNewPasswordThenSave()
-                .fillNTempEmailAndTempPasswordThenSave();
+    public void backToTempEmailAndTempPassword() throws IOException {
+            homePage
+                    .goToAuthenticationPage()
+                    .properLoginWithRandomGenerateEmailAndLogin()
+                    .clickMyPersonalInfromationButtonAndGoToPersonalInformationPage()
+                    .fillNewEmailAndNewPasswordThenSave()
+                    .fillNTempEmailAndTempPasswordThenSave();
     }
 }

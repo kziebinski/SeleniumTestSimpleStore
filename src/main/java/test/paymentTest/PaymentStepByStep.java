@@ -1,16 +1,14 @@
 package test.paymentTest;
 
 import model.Product;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.paymentFlow.AddedToCartPopup;
 import pages.paymentFlow.OrderConfirmationPage;
 import test.BasicSetupTest;
 
-public class PaymentStepByStep extends BasicSetupTest {
+import static org.testng.AssertJUnit.assertEquals;
 
-    private Product product = new Product();
-    private float amountProduct;
+public class PaymentStepByStep extends BasicSetupTest {
 
     @Test
     public void PaymentBuyItemNotLogin() {
@@ -26,7 +24,7 @@ public class PaymentStepByStep extends BasicSetupTest {
                         .clickPayByBankWireButton()
                         .clickConfirmButton();
 
-        Assert.assertEquals(page.getTextConfirmOderComplete(), "Your order on My Store is complete.");
+        assertEquals(page.getTextConfirmOderComplete(), "Your order on My Store is complete.");
     }
 
     @Test
@@ -43,7 +41,7 @@ public class PaymentStepByStep extends BasicSetupTest {
                         .clickPayByBankWireButton()
                         .clickConfirmButton();
 
-        Assert.assertEquals(page.getTextConfirmOderComplete(), "Your order on My Store is complete.");
+        assertEquals(page.getTextConfirmOderComplete(), "Your order on My Store is complete.");
     }
 
     @Test
@@ -52,11 +50,11 @@ public class PaymentStepByStep extends BasicSetupTest {
                 homePage
                         .clickItemAndGoToProductPage()
                         .addQuantityAndClickCartButton();
-
-        amountProduct = product.getQuantity() * product.getValue();
-        Assert.assertEquals(amountProduct, popup.getValueTotalProductValue());
-        Assert.assertEquals(amountProduct + popup.getValueShipping(), popup.getTotalValue());
-        Assert.assertEquals(amountProduct, popup.getTotalValueLayerCart());
-        Assert.assertEquals(product.getQuantity(), popup.getQuantityValueLayerCart());
+        Product product = popup.getProduct();
+        float amountProduct = product.getQuantity() * product.getValue();
+        assertEquals(amountProduct, popup.getValueTotalProductValue());
+        assertEquals(amountProduct + popup.getValueShipping(), popup.getTotalValue());
+        assertEquals(amountProduct, popup.getTotalValueLayerCart());
+        assertEquals(product.getQuantity(), popup.getQuantityValueLayerCart());
     }
 }

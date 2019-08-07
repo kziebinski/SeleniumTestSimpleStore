@@ -1,6 +1,8 @@
 package pages.subpages;
 
 import com.github.javafaker.Faker;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -10,10 +12,13 @@ import pages.HookProperties;
 import java.io.IOException;
 import java.util.Properties;
 
-public class PersonalInfromationPage extends BasicPage {
+public class PersonalInformationPage extends BasicPage {
 
+    private final static Logger log = LogManager.getLogger(PersonalInformationPage.class.getName());
     private Faker faker = new Faker();
     private HookProperties hookProperties = new HookProperties();
+    private Properties properties;
+    private Properties fakeProperties;
 
     @FindBy(id = "email")
     WebElement emailInput;
@@ -30,15 +35,13 @@ public class PersonalInfromationPage extends BasicPage {
     @FindBy(xpath = "//*[@id=\"center_column\"]/div/form/fieldset/div[11]/button")
     WebElement saveButton;
 
-    @FindBy(xpath = "//*[@id=\"center_column\"]/div/p")
-    WebElement alertSuccessfullyUpdate;
-
-
-    public PersonalInfromationPage(WebDriver driver){
+    PersonalInformationPage(WebDriver driver) throws IOException {
         super(driver);
+        properties = hookProperties.loginLoadProperties();
+        fakeProperties = hookProperties.loginLoadFakeProperties();
     }
 
-    public PersonalInfromationPage fillNewEmailAndNewPasswordThenSave(){
+    public PersonalInformationPage fillNewEmailAndNewPasswordThenSave() {
         Properties prop = hookProperties.loginWriteProperties();
         String fakeEmail = faker.internet().emailAddress();
         String fakePassword = faker.internet().password();
@@ -47,23 +50,24 @@ public class PersonalInfromationPage extends BasicPage {
         try {
             prop.store(hookProperties.outputStream(), null);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e);
         }
-        System.out.println(prop);
+        log.info(prop);
         emailInput.clear();
         emailInput.sendKeys(fakeEmail);
-        oldPasswordInput.sendKeys(hookProperties.loginLoadProperties().getProperty("login.passwordTemp"));
+        oldPasswordInput.sendKeys(properties.getProperty("login.passwordTemp"));
         newPasswordInput.sendKeys(fakePassword);
         confirmNewPasswordInput.sendKeys(fakePassword);
         saveButton.click();
         return this;
     }
-    public PersonalInfromationPage fillNTempEmailAndTempPasswordThenSave(){
+
+    public PersonalInformationPage fillNTempEmailAndTempPasswordThenSave() {
         emailInput.clear();
-        emailInput.sendKeys(hookProperties.loginLoadProperties().getProperty("login.emailTemp"));
-        oldPasswordInput.sendKeys(hookProperties.loginLoadFakeProperties().getProperty("login.fakePassword"));
-        newPasswordInput.sendKeys(hookProperties.loginLoadProperties().getProperty("login.passwordTemp"));
-        confirmNewPasswordInput.sendKeys(hookProperties.loginLoadProperties().getProperty("login.passwordTemp"));
+        emailInput.sendKeys(properties.getProperty("login.emailTemp"));
+        oldPasswordInput.sendKeys(fakeProperties.getProperty("login.fakePassword"));
+        newPasswordInput.sendKeys(properties.getProperty("login.passwordTemp"));
+        confirmNewPasswordInput.sendKeys(properties.getProperty("login.passwordTemp"));
         saveButton.click();
         return this;
     }

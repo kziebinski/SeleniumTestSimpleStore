@@ -1,9 +1,10 @@
 package test.productTest;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.subpages.product.PrintPage;
 import test.BasicSetupTest;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class Print extends BasicSetupTest {
 
@@ -17,7 +18,7 @@ public class Print extends BasicSetupTest {
                         .clickItemAndGoToProductPage()
                         .clickPrintButton();
 
-        Assert.assertEquals("chrome://print/", page.getCurrentlyUrl());
+        assertEquals("chrome://print/", page.getCurrentlyUrl());
     }
 
     @Test
@@ -27,6 +28,6 @@ public class Print extends BasicSetupTest {
                         .clickItemAndGoToProductPage()
                         .clickPrintButton();
 
-        Assert.assertEquals("chrome://print/", page.getCurrentlyUrl());
+        assertEquals("chrome://print/", page.getCurrentlyUrl());
     }
 }

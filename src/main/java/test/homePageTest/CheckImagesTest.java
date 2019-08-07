@@ -5,8 +5,11 @@ import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import test.BasicSetupTest;
+
 import java.io.IOException;
 import java.util.ArrayList;
+
+import static org.testng.Assert.assertTrue;
 
 public class CheckImagesTest extends BasicSetupTest {
 
@@ -26,6 +29,6 @@ public class CheckImagesTest extends BasicSetupTest {
                 Assert.fail();
             }
         }
-        Assert.assertTrue(true);
+        assertTrue(true);
     }
 }

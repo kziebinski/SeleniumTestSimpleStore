@@ -5,41 +5,30 @@ import java.util.Properties;
 
 public class HookProperties {
 
-    public Properties loginLoadProperties(){
-        return loginLoadProperties("src/main/resources/properties/login.properties");
+    private final String login_properties = "src/main/resources/properties/login.properties";
+    private final String loginFake_properties = "src/main/resources/properties/fakeLogin.properties";
+
+    public Properties loginLoadProperties() throws IOException {
+        return loginLoadProperties(login_properties);
     }
 
-    public Properties loginLoadFakeProperties(){
-        return loginLoadProperties("src/main/resources/properties/fakeLogin.properties");
+    public Properties loginLoadFakeProperties() throws IOException {
+        return loginLoadProperties(loginFake_properties);
     }
 
-    private Properties loginLoadProperties(String pathProp) {
-        try (InputStream input = new FileInputStream(pathProp)) {
-            Properties prop = new Properties();
-            prop.load(input);
-            return prop;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+    private Properties loginLoadProperties(String pathProp) throws IOException {
+        InputStream input = new FileInputStream(pathProp);
+        Properties prop = new Properties();
+        prop.load(input);
+        return prop;
     }
 
-    public Properties loginWriteProperties(){
-        try (OutputStream input = outputStream()) {
-            Properties prop = new Properties();
-            return prop;
-        } catch (IOException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public Properties loginWriteProperties() {
+        Properties prop = new Properties();
+        return prop;
     }
 
-    public OutputStream outputStream(){
-        try {
-            return new FileOutputStream("src/main/resources/properties/fakeLogin.properties");
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
+    public OutputStream outputStream() throws FileNotFoundException {
+        return new FileOutputStream(loginFake_properties);
     }
 }

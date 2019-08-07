@@ -1,10 +1,11 @@
 package test.productTest;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.subpages.product.ProductPage;
 import pages.subpages.product.WriteReviewPage;
 import test.BasicSetupTest;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class WriteReview extends BasicSetupTest {
 
@@ -19,7 +20,7 @@ public class WriteReview extends BasicSetupTest {
                         .clickWriteReviewButton()
                         .addTitleAndCommentAndClickSend();
 
-        Assert.assertEquals("Your comment has been added and will be available once approved by a moderator", page.textNewCommentSend());
+        assertEquals("Your comment has been added and will be available once approved by a moderator", page.textNewCommentSend());
     }
 
     @Test
@@ -28,6 +29,6 @@ public class WriteReview extends BasicSetupTest {
                 homePage
                         .clickItemAndGoToProductPage();
 
-        Assert.assertEquals(false, page.writeReviewButtonNotExist());
+        assertEquals(false, page.writeReviewButtonNotExist());
     }
 }

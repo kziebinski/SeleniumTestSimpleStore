@@ -1,9 +1,10 @@
 package test.shoppingCart;
 
-import org.testng.Assert;
 import org.testng.annotations.Test;
 import pages.paymentFlow.CartSummary;
 import test.BasicSetupTest;
+
+import static org.testng.AssertJUnit.assertEquals;
 
 public class deleteProductFromShoppingCart extends BasicSetupTest {
 
@@ -17,7 +18,7 @@ public class deleteProductFromShoppingCart extends BasicSetupTest {
                         .clickAddItemToCartAndConfirm()
                         .clickDeleteProductButton();
 
-        Assert.assertEquals("Your shopping cart is empty.", page.getTextAlertEmptyShoppingCart());
+        assertEquals("Your shopping cart is empty.", page.getTextAlertEmptyShoppingCart());
     }
 
     @Test
@@ -27,6 +28,6 @@ public class deleteProductFromShoppingCart extends BasicSetupTest {
                         .clickAddItemToCartAndConfirm()
                         .clickDeleteProductButton();
 
-        Assert.assertEquals("Your shopping cart is empty.", page.getTextAlertEmptyShoppingCart());
+        assertEquals("Your shopping cart is empty.", page.getTextAlertEmptyShoppingCart());
     }
 }

@@ -1,11 +1,14 @@
 package pages.subpages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import pages.BasicPage;
 import pages.HookProperties;
 import pages.paymentFlow.AddressesPage;
+import test.BasicSetupTest;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,7 +17,9 @@ import java.util.Properties;
 
 public class AuthenticationPage extends BasicPage {
 
+    private final Logger log = LogManager.getLogger(BasicSetupTest.class.getName());
     private HookProperties hookProperties = new HookProperties();
+    private final Properties properties = loginProperties();
 
     @FindBy(id = "email")
     WebElement emailInput;
@@ -44,33 +49,33 @@ public class AuthenticationPage extends BasicPage {
     }
 
     public MyAccountPage properLoginAndGoToMyAccountPage() {
-        complementEmailPasswordAndClickConfirm(loginProperties().getProperty("login.emailMain"), loginProperties().getProperty("login.passwordMain"));
+        complementEmailPasswordAndClickConfirm(properties.getProperty("login.emailMain"), properties.getProperty("login.passwordMain"));
         return new MyAccountPage(driver);
     }
 
     public AddressesPage properLoginAndGoToAddressesPage() {
-        complementEmailPasswordAndClickConfirm(loginProperties().getProperty("login.emailMain"), loginProperties().getProperty("login.passwordMain"));
+        complementEmailPasswordAndClickConfirm(properties.getProperty("login.emailMain"), properties.getProperty("login.passwordMain"));
         return new AddressesPage(driver);
     }
 
     public MyAccountPage properLoginWithTemperaryEmailAndLogin() {
-        complementEmailPasswordAndClickConfirm(loginProperties().getProperty("login.emailTemp"), loginProperties().getProperty("login.passwordTemp"));
+        complementEmailPasswordAndClickConfirm(properties.getProperty("login.emailTemp"), properties.getProperty("login.passwordTemp"));
         return new MyAccountPage(driver);
     }
 
-    public MyAccountPage properLoginWithRandomGenerateEmailAndLogin(){
+    public MyAccountPage properLoginWithRandomGenerateEmailAndLogin() throws IOException {
         complementEmailPasswordAndClickConfirm(hookProperties.loginLoadFakeProperties().getProperty("login.fakeEmail"), hookProperties.loginLoadFakeProperties().getProperty("login.fakePassword"));
         return new MyAccountPage(driver);
     }
 
     private Properties loginProperties() {
+        Properties prop = new Properties();
         try (InputStream input = new FileInputStream("src/main/resources/properties/login.properties")) {
-            Properties prop = new Properties();
             prop.load(input);
             return prop;
         } catch (IOException e) {
-            e.printStackTrace();
-            return null;
+            log.error("Cannot load properties", e);
+            return prop;
         }
     }
 }

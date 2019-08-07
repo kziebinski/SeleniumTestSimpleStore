@@ -13,8 +13,7 @@ import pages.paymentFlow.CartSummary;
 import java.util.Random;
 
 public class ProductPage extends BasicPage {
-
-    private Product product = new Product();
+    private static final Random rnd = new Random();
 
     @FindBy(xpath = "//*[@id=\"add_to_cart\"]/button")
     WebElement addToCartButton;
@@ -25,7 +24,7 @@ public class ProductPage extends BasicPage {
     @FindBy(xpath = "//*[@id=\"quantity_wanted\"]")
     WebElement addQuantityProductInput;
 
-    @FindBy(id = "our_price_display" )
+    @FindBy(id = "our_price_display")
     WebElement priceProduct;
 
     @FindBy(id = "wishlist_button")
@@ -43,52 +42,61 @@ public class ProductPage extends BasicPage {
     @FindBy(id = "send_friend_button")
     WebElement sendFriendButton;
 
-    public ProductPage(WebDriver driver){ super(driver); }
+    public ProductPage(WebDriver driver) {
+        super(driver);
+    }
 
-    public CartSummary clickAddToCartAndConfirmPopup(){
+    public CartSummary clickAddToCartAndConfirmPopup() {
         addToCartButton.click();
         proceedToCheckoutButton.click();
         return new CartSummary(driver);
     }
-    public void addQuantity(){
-        Random rnd = new Random();
+
+    private Product addQuantity() {
         int tempRnd = rnd.nextInt(10) + 2;
-        product.setQuantity(tempRnd);
-        product.setValue(Float.parseFloat(priceProduct.getText().substring(1)));
+        Product product = new Product(Float.parseFloat(priceProduct.getText().substring(1)), tempRnd);
         addQuantityProductInput.clear();
         addQuantityProductInput.sendKeys(String.valueOf(tempRnd));
+        return product;
     }
-    public AddedToCartPopup addQuantityAndClickCartButton(){
-        addQuantity();
+
+    public AddedToCartPopup addQuantityAndClickCartButton() {
+        Product product = addQuantity();
         addToCartButton.click();
-        return new AddedToCartPopup(driver);
+        return new AddedToCartPopup(driver, product);
     }
-    public ProductPage clickAddToWishlistButton(){
+
+    public ProductPage clickAddToWishlistButton() {
         wait.until(ExpectedConditions.elementToBeClickable(addToWishlistButton)).click();
         return this;
     }
-    public String textAddedToYourWishlistPopup(){
+
+    public String textAddedToYourWishlistPopup() {
         return addedToYourWishlistPopup.getText();
     }
-    public PrintPage clickPrintButton(){
+
+    public PrintPage clickPrintButton() {
         wait.until(ExpectedConditions.elementToBeClickable(printButton)).click();
         for (String printTab : driver.getWindowHandles()) {
             driver.switchTo().window(printTab);
         }
         return new PrintPage(driver);
     }
-    public WriteReviewPage clickWriteReviewButton(){
+
+    public WriteReviewPage clickWriteReviewButton() {
         wait.until(ExpectedConditions.elementToBeClickable(writeReviewButton)).click();
         return new WriteReviewPage(driver);
     }
-    public boolean writeReviewButtonNotExist(){
-        try{
+
+    public boolean writeReviewButtonNotExist() {
+        try {
             return writeReviewButton.isDisplayed();
-        }catch (NoSuchElementException ignored){
+        } catch (NoSuchElementException ignored) {
             return false;
         }
     }
-    public SendToFriendPage clickAndGoTOSendFriendPage(){
+
+    public SendToFriendPage clickAndGoTOSendFriendPage() {
         wait.until(ExpectedConditions.elementToBeClickable(sendFriendButton)).click();
         return new SendToFriendPage(driver);
     }

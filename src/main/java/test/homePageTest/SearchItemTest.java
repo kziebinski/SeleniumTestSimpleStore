@@ -7,6 +7,8 @@ import test.BasicSetupTest;
 
 import java.util.List;
 
+import static org.testng.Assert.assertTrue;
+
 public class SearchItemTest extends BasicSetupTest {
 
     private final String searchTshirtText = "t-shirts";
@@ -26,6 +28,6 @@ public class SearchItemTest extends BasicSetupTest {
                 Assert.fail();
             }
         }
-        Assert.assertTrue(true);
+        assertTrue(true);
     }
 }

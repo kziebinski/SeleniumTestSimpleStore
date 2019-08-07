@@ -6,6 +6,8 @@ import org.openqa.selenium.support.FindBy;
 import pages.BasicPage;
 import pages.paymentFlow.CartSummary;
 
+import java.io.IOException;
+
 public class MyAccountPage extends BasicPage {
 
     @FindBy(xpath = "//*[@id=\"center_column\"]/h1")
@@ -23,19 +25,22 @@ public class MyAccountPage extends BasicPage {
     public MyAccountPage(WebDriver driver) {
         super(driver);
     }
-    public String myAccountNameText(){
+
+    public String myAccountNameText() {
         return customerAccountName.getText();
     }
-    public String myAccountText(){
+
+    public String myAccountText() {
         return myAccountText.getText();
     }
 
-    public CartSummary goToCartSummaryPage(){
+    public CartSummary goToCartSummaryPage() {
         shoppingCartButton.click();
         return new CartSummary(driver);
     }
-    public PersonalInfromationPage clickMyPersonalInfromationButtonAndGoToPersonalInformationPage(){
+
+    public PersonalInformationPage clickMyPersonalInfromationButtonAndGoToPersonalInformationPage() throws IOException {
         myPersonalInformationButton.click();
-        return new PersonalInfromationPage(driver);
+        return new PersonalInformationPage(driver);
     }
 }
