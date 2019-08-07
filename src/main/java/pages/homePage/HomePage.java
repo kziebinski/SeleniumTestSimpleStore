@@ -13,6 +13,7 @@ import pages.paymentFlow.CartSummary;
 import pages.socialMediaPage.FacebookPage;
 import pages.socialMediaPage.TwitterPage;
 import pages.subpages.AuthenticationPage;
+import pages.subpages.BestSellersPage;
 import pages.subpages.product.ProductPage;
 import pages.subpages.SearchPage;
 
@@ -53,6 +54,9 @@ public class HomePage extends BasicPage {
 
     @FindBy(xpath = "//*[@id=\"header\"]/div[3]/div/div/div[3]/div/a")
     WebElement viewShoppingCartListButton;
+
+    @FindBy(xpath = "//*[@id=\"block_various_links_footer\"]/ul/li[3]/a")
+    WebElement bestSellersButton;
 
     public HomePage(WebDriver driver) {
         super(driver);
@@ -148,5 +152,9 @@ public class HomePage extends BasicPage {
 
     private WebElement findElementProductImage(int tempValueItem) {
         return driver.findElement(By.xpath("//*[@id=\"homefeatured\"]/li[" + tempValueItem + "]/div/div[2]/h5/a"));
+    }
+    public BestSellersPage clickAndGoToBestSellersPage(){
+        bestSellersButton.click();
+        return new BestSellersPage(driver);
     }
 }
