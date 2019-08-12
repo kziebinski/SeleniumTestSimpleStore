@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 import pages.BasicPage;
+import pages.HelpTest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +22,19 @@ public class BestSellersPage extends BasicPage {
     private final String sortPriceDESC = "price:desc";
     private final String sortPriceASC = "price:asc";
     private final String sortNameASC = "name:asc";
+    private HelpTest helpTest = new HelpTest();
 
     @FindBy(id = "selectProductSort")
     WebElement sortByButton;
 
     public BestSellersPage(WebDriver driver) {
         super(driver);
-        this.listPriceNotSort = listPriceOfProduct();
-        this.listNameNotSort = listNameProduct();
+        if(helpTest.getNameClass().equals("SortProductsByPrice")){
+            this.listPriceNotSort = listPriceOfProduct();
+        }
+        else if(helpTest.getNameClass().equals("SortProductsByName")){
+            this.listNameNotSort =  listNameProduct();
+        }
     }
 
     private BestSellersPage clickSortAndSelectValue(String value) {

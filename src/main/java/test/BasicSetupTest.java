@@ -11,6 +11,7 @@ import org.testng.Reporter;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
+import pages.HelpTest;
 import pages.homePage.HomePage;
 import test.setupTest.BrowserSetup;
 
@@ -27,6 +28,7 @@ public class BasicSetupTest {
     private BrowserSetup browserSetup = new BrowserSetup();
     private final String baseUrl = "http://automationpractice.com/index.php";
     private final Logger log = LogManager.getLogger(BasicSetupTest.class.getName());
+    private HelpTest helpTest = new HelpTest();
 
     @Parameters("browser")
     @BeforeMethod()
@@ -36,6 +38,7 @@ public class BasicSetupTest {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(baseUrl);
         homePage = new HomePage(driver);
+        helpTest.setNameClass(this.getClass().getName().substring(this.getClass().getName().lastIndexOf(".") + 1));
         log.info("Setup complete -> Start testing...");
         Reporter.log("Setup complete -> Start testing...");
     }

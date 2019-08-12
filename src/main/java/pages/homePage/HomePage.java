@@ -7,15 +7,14 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.BasicPage;
 import pages.paymentFlow.CartSummary;
 import pages.socialMediaPage.FacebookPage;
 import pages.socialMediaPage.TwitterPage;
 import pages.subpages.AuthenticationPage;
 import pages.subpages.BestSellersPage;
-import pages.subpages.product.ProductPage;
 import pages.subpages.SearchPage;
+import pages.subpages.product.ProductPage;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;

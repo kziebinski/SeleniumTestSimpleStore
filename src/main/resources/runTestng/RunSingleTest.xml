@@ -8,9 +8,9 @@
     <test name="Test">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="test.productList.SortProdcutsByName">
+            <class name="test.productList.SortProductsByPrice">
                 <methods>
-                    <include name="sortProductsByNameA_Z" />
+                    <include name="sortProductsByHighestPrice" />
                 </methods>
             </class>
         </classes>
