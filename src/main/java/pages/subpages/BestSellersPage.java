@@ -11,14 +11,12 @@ import pages.HelpTest;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BestSellersPage extends BasicPage {
+public class BestSellersPage<T> extends BasicPage {
 
     private int countItem = 7;
-    private List<Float> listPriceNotSort;
-    private List<String> listNameNotSort;
-    private List<Float> listSortByHigherPrice = new ArrayList<>();
-    private List<Float> listSortByLowestPrice = new ArrayList<>();
-    private List<String> listSortByNameA_Z = new ArrayList<>();
+    private T listNotSort;
+    private T listAfterSort;
+
     private final String sortPriceDESC = "price:desc";
     private final String sortPriceASC = "price:asc";
     private final String sortNameASC = "name:asc";
@@ -30,10 +28,10 @@ public class BestSellersPage extends BasicPage {
     public BestSellersPage(WebDriver driver) {
         super(driver);
         if(helpTest.getNameClass().equals("SortProductsByPrice")){
-            this.listPriceNotSort = listPriceOfProduct();
+            this.listNotSort = (T) listPriceOfProduct();
         }
-        else if(helpTest.getNameClass().equals("SortProductsByName")){
-            this.listNameNotSort =  listNameProduct();
+        else if(helpTest.getNameClass().equals("SortProdcutsByName")){
+            this.listNotSort = (T) listNameProduct();
         }
     }
 
@@ -79,24 +77,17 @@ public class BestSellersPage extends BasicPage {
         return listTemp;
     }
 
-    public List<Float> getListPriceNotSort() {
-        return listPriceNotSort;
+    public T getListNotSort() {
+        return listNotSort;
     }
 
-    public List<Float> getListSortByHigherPrice() {
-        this.listSortByHigherPrice = listPriceOfProduct();
-        return this.listSortByHigherPrice;
-    }
-
-    public List<Float> getListSortByLowestPrice() {
-        this.listSortByLowestPrice = listPriceOfProduct();
-        return this.listSortByLowestPrice;
-    }
-    public List<String> getListNameNotSort(){
-        return listNameNotSort;
-    }
-    public List<String> getListSortByNameA_Z(){
-        this.listSortByNameA_Z = listNameProduct();
-        return this.listSortByNameA_Z;
+    public T getListAfterSort(){
+        if(helpTest.getNameClass().equals("SortProductsByPrice")){
+            this.listAfterSort = (T) listPriceOfProduct();
+        }
+        else if((helpTest.getNameClass().equals("SortProdcutsByName"))){
+            this.listAfterSort = (T) listNameProduct();
+        }
+        return this.listAfterSort;
     }
 }

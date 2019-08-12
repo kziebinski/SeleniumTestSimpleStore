@@ -5,6 +5,7 @@ import pages.subpages.BestSellersPage;
 import test.BasicSetupTest;
 
 import java.util.Collections;
+import java.util.List;
 
 import static org.testng.AssertJUnit.assertEquals;
 
@@ -17,8 +18,10 @@ public class SortProductsByPrice extends BasicSetupTest {
                         .clickAndGoToBestSellersPage()
                         .clickSortHighestPrice();
 
-        page.getListPriceNotSort().sort(Collections.reverseOrder());
-        assertEquals(page.getListPriceNotSort(), page.getListSortByHigherPrice());
+        List<Float> tempList = (List<Float>) page.getListNotSort();
+        tempList.sort(Collections.reverseOrder());
+        assertEquals(tempList, page.getListAfterSort());
+
     }
 
     //Test fail - bug on page
@@ -29,7 +32,7 @@ public class SortProductsByPrice extends BasicSetupTest {
                         .clickAndGoToBestSellersPage()
                         .clickSortLowestPrice();
 
-        Collections.sort(page.getListPriceNotSort());
-        assertEquals(page.getListPriceNotSort(), page.getListSortByLowestPrice());
+        Collections.sort((List<Float>) page.getListNotSort());
+        assertEquals(page.getListNotSort(), page.getListAfterSort());
     }
 }

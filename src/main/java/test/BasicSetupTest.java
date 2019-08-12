@@ -17,6 +17,7 @@ import test.setupTest.BrowserSetup;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -32,13 +33,13 @@ public class BasicSetupTest {
 
     @Parameters("browser")
     @BeforeMethod()
-    public void beforeRun(String browser) throws Exception {
+    public void beforeRun(String browser, Method test) throws Exception {
         driver = browserSetup.setup(browser);
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(baseUrl);
         homePage = new HomePage(driver);
-        helpTest.setNameClass(this.getClass().getName().substring(this.getClass().getName().lastIndexOf(".") + 1));
+        helper(test);
         log.info("Setup complete -> Start testing...");
         Reporter.log("Setup complete -> Start testing...");
     }
@@ -52,6 +53,11 @@ public class BasicSetupTest {
 
     public void refreshPage() {
         driver.navigate().refresh();
+    }
+
+    private void helper(Method method) {
+        helpTest.setNameClass(this.getClass().getName().substring(this.getClass().getName().lastIndexOf(".") + 1));
+        helpTest.setNameTest(method.getName());
     }
 
     public void takeScreenshotWhenFail(ITestResult result) {
