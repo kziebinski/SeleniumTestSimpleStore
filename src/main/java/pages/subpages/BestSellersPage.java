@@ -16,10 +16,6 @@ public class BestSellersPage<T> extends BasicPage {
     private int countItem = 7;
     private T listNotSort;
     private T listAfterSort;
-
-    private final String sortPriceDESC = "price:desc";
-    private final String sortPriceASC = "price:asc";
-    private final String sortNameASC = "name:asc";
     private HelpTest helpTest = new HelpTest();
 
     @FindBy(id = "selectProductSort")
@@ -42,17 +38,17 @@ public class BestSellersPage<T> extends BasicPage {
     }
 
     public BestSellersPage clickSortHighestPrice() {
-        clickSortAndSelectValue(sortPriceDESC);
+        clickSortAndSelectValue(BestSellersSort.PRICE_DESC.getNameSort());
         return this;
     }
 
     public BestSellersPage clickSortLowestPrice() {
-        clickSortAndSelectValue(sortPriceASC);
+        clickSortAndSelectValue(BestSellersSort.PRICE_ASC.getNameSort());
         return this;
     }
 
     public BestSellersPage clickSortNameA_Z(){
-        clickSortAndSelectValue(sortNameASC);
+        clickSortAndSelectValue(BestSellersSort.NAME_ASC.getNameSort());
         return this;
     }
 
