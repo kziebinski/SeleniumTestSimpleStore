@@ -8,9 +8,9 @@
     <test name="Test">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="test.productList.SortProductsByPrice">
+            <class name="test.compareProductTest.CompareProduct">
                 <methods>
-                    <include name="sortProductsByHighestPrice" />
+                    <include name="addToCompareRandomProduct" />
                 </methods>
             </class>
         </classes>
